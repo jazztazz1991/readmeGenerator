@@ -7,3 +7,5 @@ router.post('/readme', (req, res) => {
     console.log(req.body);
     res.send('Readme Created');
 });
+
+export { router as ReadmeGen };

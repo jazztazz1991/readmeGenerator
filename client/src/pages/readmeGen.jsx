@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { /*React,*/ useState /*useEffect*/ } from 'react';
+// import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
 import axios from 'axios';
 import instance from '../hooks/API.js';
 
 export default function ReadmeGen() {
 	const [readme, setReadme] = useState({
-		name: '',
+		github: '',
+		email: '',
+		title: '',
 		description: '',
-		priority: 'low',
-		boardId: '',
+		installation: '',
+		usage: '',
+		license: '',
+		contributing: '',
+		tests: '',
+		screenshotLinks: [],
+		deployedLink: '',
+		technologies: [{ name: '', color: '' }],
 	});
 
 	function toggleModal() {
@@ -20,9 +28,10 @@ export default function ReadmeGen() {
 		console.log(e.target.value);
 		setReadme({ ...readme, [e.target.name]: e.target.value });
 	}
-	function createReadme() {
-		console.log('Readme Created');
-	}
+	const createReadme = async () => {
+		const response = await instance.post('/api/readme', readme);
+		console.log(response.data);
+	};
 	return (
 		<div className='w-fit mx-auto'>
 			<div className='flex flex-row justify-end'>
@@ -57,11 +66,25 @@ export default function ReadmeGen() {
 							<h3 className='text-xl font-bold text-blue-light text-center my-5 grow justify-self-center'>
 								Add Task
 							</h3>
+                            <label className='font-medium text-blue-light'>Github Username</label>
+							<input
+								type='text'
+								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
+								name='github'
+								onChange={handleChange}
+							/>
+                            <label className='font-medium text-blue-light'>Contact Email</label>
+							<input
+								type='email'
+								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
+								name='email'
+								onChange={handleChange}
+							/>
 							<label className='font-medium text-blue-light'>Title</label>
 							<input
 								type='text'
 								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
-								name='name'
+								name='title'
 								onChange={handleChange}
 							/>
 							<label className='font-medium text-blue-light'>Description</label>
@@ -71,16 +94,27 @@ export default function ReadmeGen() {
 								name='description'
 								onChange={handleChange}
 							/>
-							<label className='font-medium text-blue-light'>Priority</label>
-							<select
+                            <label className='font-medium text-blue-light'>Install Command</label>
+                            <input
+								type='text'
 								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
-								name='priority'
+								name='installation'
 								onChange={handleChange}
-							>
-								<option value='low'>Low</option>
-								<option value='medium'>Medium</option>
-								<option value='high'>High</option>
-							</select>
+							/>
+                            <label className='font-medium text-blue-light'>Information about using this repo</label>
+                            <textarea
+								type='text'
+								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
+								name='usage'
+								onChange={handleChange}
+							/>
+                            <label className='font-medium text-blue-light'>License</label>
+                            <input
+								type='text'
+								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
+								name='installation'
+								onChange={handleChange}
+							/>
 						</div>
 						<div className='bg-slate-600 px-4 py-3 text-right border-t-4 border-purple-c '>
 							<button
