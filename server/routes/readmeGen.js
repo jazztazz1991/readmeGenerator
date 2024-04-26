@@ -55,7 +55,7 @@ ${renderLicenseLink(data.license)}
 
 ## Deployed
 
-[Deployed Link](${data.deployed})
+[${data.deployedLink}](${data.deployedLink})
     
 ## Installation
     
@@ -86,6 +86,8 @@ ${data.tests}
 ## Questions
     
 If you have any questions about the repo, open an issue or contact me directly at ${data.email}. You can find more of my work at [${data.github}](https://github.com/${data.github}/).`
+
+
     const resolvedPath = path.resolve(data.readmeLink);
     fs.writeFileSync(resolvedPath, string);
     res.send('Readme Created');
