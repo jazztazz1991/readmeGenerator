@@ -125,7 +125,7 @@ export default function ReadmeGen() {
 								name='title'
 								onChange={handleChange}
 							/>
-							<label className='font-medium text-blue-light'>Description</label>
+							<label className='font-medium text-blue-light'>Description (You are able to put in Markdown code to stylize the description)</label>
 							<textarea
 								type='text'
 								className='w-full outline-none rounded bg-slate-300 p-2 mt-2 mb-3'
